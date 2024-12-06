@@ -116,7 +116,7 @@ export default function Navbar() {
                     </Popover>
 
                     {/* Conditional rendering based on role */}
-                    {role === 'admin' || role==='Admin' && (
+                    {(role === 'admin' || role==='Admin') && (
                         <>
                             <Link to="/employee" className="text-2xl font-semibold leading-6 text-gray-900">
                                 Employees
