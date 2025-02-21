@@ -1,0 +1,26 @@
+pipeline:
+  name: Ravi
+  identifier: Ravi
+  projectIdentifier: Practice
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: Ravi
+        identifier: Ravi
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: Email
+                  name: Email_1
+                  identifier: Email_1
+                  spec:
+                    to: raviteja@middlewaretalents.com
+                    cc: ""
+                    subject: HI
+                    body: Hi
+                  timeout: 10m
+        tags: {}
