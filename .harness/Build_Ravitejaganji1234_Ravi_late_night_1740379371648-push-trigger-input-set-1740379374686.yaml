@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_Ravitejaganji1234_Ravi_late_night_1740379371648-push-trigger-input-set
+  identifier: Build_Ravitejaganji1234_Ravi_late_night_1740379371648pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: Practice
+  pipeline:
+    identifier: Build_Ravitejaganji1234_Ravi_late_night_1740379371648
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
