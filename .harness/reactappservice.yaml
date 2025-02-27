@@ -1,0 +1,5 @@
+service:
+  name: react-app-service
+  identifier: reactappservice
+  orgIdentifier: default
+  projectIdentifier: ReactDeployment
