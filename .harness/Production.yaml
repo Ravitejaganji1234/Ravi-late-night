@@ -1,0 +1,8 @@
+environment:
+  name: Production
+  identifier: Production
+  description: ""
+  tags: {}
+  type: Production
+  orgIdentifier: default
+  projectIdentifier: ReactDeployment
