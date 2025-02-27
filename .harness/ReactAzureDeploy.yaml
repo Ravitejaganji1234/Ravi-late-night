@@ -1,0 +1,85 @@
+pipeline:
+  name: ReactAzureDeploy
+  identifier: ReactAzureDeploy
+  projectIdentifier: ReactDeployment
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github_OAuth_1740116914085
+        repoName: https://github.com/Ravitejaganji1234/Ravi-late-night.git
+        build: <+input>
+  stages:
+    - stage:
+        name: Build
+        identifier: Build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    shell: Sh
+                    command: |-
+                      npm install
+                      npm run build
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: dockerconnect
+                    repo: Ravi-late-night
+                    tags:
+                      - latest
+    - stage:
+        name: Deploy
+        identifier: Deploy
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: AzureWebApp
+          service:
+            serviceRef: reactappservice
+          execution:
+            steps:
+              - step:
+                  type: AzureSlotDeployment
+                  name: AzureSlotDeployment_1
+                  identifier: AzureSlotDeployment_1
+                  spec:
+                    webApp: Harness-demo
+                    deploymentSlot: Harness-demo
+                    clean: false
+                  timeout: 20m
+            rollbackSteps:
+              - step:
+                  name: WebApp rollback
+                  identifier: webAppRollback
+                  type: AzureWebAppRollback
+                  timeout: 20m
+                  spec: {}
+          environment:
+            environmentRef: Production
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: Ravi
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
